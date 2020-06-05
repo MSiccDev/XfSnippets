@@ -7,10 +7,10 @@
         <Keyword>Xamarin</Keyword>
         <Keyword>Xamarin Forms</Keyword>
       </Keywords>
-      <Title>Xamarin Forms BindableProperty with PropertyChanged</Title>
+      <Title>bindpa</Title>
       <Author>Marco Siccardi</Author>
-      <Description>Creates a BindableProperty with the most common params, including PropertyChanged event handler</Description>
-      <Shortcut>bindppc</Shortcut>
+      <Description>Creates an attached Xamarin Forms BindableProperty with the most common params</Description>
+      <Shortcut>bindpa</Shortcut>
       <SnippetTypes>
         <SnippetType>Expansion</SnippetType>
       </SnippetTypes>
@@ -19,21 +19,16 @@
       <Code Language="CSharp">
         <![CDATA[
 
-public static BindableProperty $PropertyName$Property = BindableProperty.Create(nameof($PropertyName$), typeof($PropertyType$), typeof($ContainingType$), default($PropertyType$), BindingMode.Default, propertyChanged: On$PropertyName$PropertyChanged);
+public static readonly BindableProperty $PropertyName$Property = BindableProperty.CreateAttached("$PropertyName$", typeof($PropertyType$), typeof($ContainingType$), default($PropertyType$), BindingMode.Default);
 
-public $PropertyType$ $PropertyName$
+public static bool Get$PropertyName$ (BindableObject bindable)
 {
-  get => ($PropertyType$)GetValue($PropertyName$Property);
-  set => SetValue($PropertyName$Property, value);
+  return ($PropertyType$)bindable.GetValue($PropertyName$Property);
 }
 
-
-private static void On$PropertyName$PropertyChanged(BindableObject bindable, object oldValue, object newValue)
+public static void Set$PropertyName$ (BindableObject bindable, bool value)
 {
-if (bindable is $ContainingType$ current)
-  {
-    //TODO
-  }
+  bindable.SetValue($PropertyName$Property, value);
 }
 
           ]]>
@@ -46,12 +41,12 @@ if (bindable is $ContainingType$ current)
         </Literal>
         <Literal>
           <ID>PropertyType</ID>
-          <ToolTip>The type of the Property to add as a BindableProperty</ToolTip>
+          <ToolTip>The type of the Property to add as attached BindableProperty</ToolTip>
           <Default>object</Default>
         </Literal>
         <Literal>
           <ID>ContainingType</ID>
-          <ToolTip>The type containing this BindableProperty</ToolTip>
+          <ToolTip>The type containing this attached BindableProperty</ToolTip>
           <Function>ClassName()</Function>
           <Default>object</Default>
         </Literal>
