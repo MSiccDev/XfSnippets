@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Xamarin Forms BindableProperty with PropertyChanged</Title>
+      <Author>Marco Siccardi</Author>
+      <Description>Creates a bindable property with the most common params, including PropertyChanged event handler</Description>
+      <Shortcut>bindpapc</Shortcut>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Code Language="CSharp">
+        <![CDATA[
+
+public static BindableProperty $PropertyName$Property = BindableProperty.CreateAttached("$PropertyName$", typeof($PropertyType$), typeof($ContainingType$), default($PropertyType$), BindingMode.Default, propertyChanged: On$PropertyName$PropertyChanged);
+
+public static bool Get$PropertyName$ (BindableObject bindable)
+{
+  return ($PropertyType$)bindable.GetValue($PropertyName$Property);
+}
+
+public static void Set$PropertyName$ (BindableObject bindable, bool value)
+{
+  bindable.SetValue($PropertyName$Property, value);
+}
+
+
+private static void On$PropertyName$PropertyChanged(BindableObject bindable, object oldValue, object newValue)
+{
+  if (bindable is $ContainingType$ current)
+  {
+      //TODO
+  }
+}
+
+          ]]>
+      </Code>
+      <Declarations>
+        <Literal>
+          <ID>PropertyName</ID>
+          <ToolTip>The name of the Property</ToolTip>
+          <Default>MyPropertyName</Default>
+        </Literal>
+        <Literal>
+          <ID>PropertyType</ID>
+          <ToolTip>The type of the Property to add as a BindableProperty</ToolTip>
+          <Default>object</Default>
+        </Literal>
+        <Literal>
+          <ID>ContainingType</ID>
+          <ToolTip>The type containing this BindableProperty</ToolTip>
+          <Function>ClassName()</Function>
+          <Default>object</Default>
+        </Literal>
+      </Declarations>
+      <Imports>
+        <Import>
+          <Namespace>Xamarin.Forms</Namespace>
+        </Import>
+      </Imports>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>
